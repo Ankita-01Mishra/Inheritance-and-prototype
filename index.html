@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inheritance and prototype</title>
+</head>
+<style>
+    h3{
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            color: purple;
+            text-shadow: 1px 1px palevioletred;
+        }
+        pre{
+            font-size: 16px;
+            font-family: cursive;
+            display: inline-block;
+            border: 2px solid rgb(33, 84, 205);
+            margin-left: 20px;
+            padding-right: 30px;
+            background:linear-gradient(to bottom, skyblue,rgb(229, 255, 188), rgb(190, 186, 223),pink);
+           
+        }
+</style>
+<body>
+    <h2 style="text-decoration: underline; color: mediumblue;text-shadow: 1px 1px skyblue;">Inheritance and prototype</h2>
+    <h3>1. Create 2 objects - parent and child. Attach methods to parent and use those methods in child object using parents prototype</h3>
+    <pre>
+        const parent ={
+            firstName:"Ankita",
+            lastName:"Mishra",
+            fullName(){
+                return(this.firstName+" "+this.lastName)
+            }
+        }
+        const child={
+            __proto__:parent
+        }
+        console.log(child.fullName());
+
+
+        OUTPUT: Ankita Mishra
+    </pre>
+    <h3>2. Write code to explain prototype chaining</h3>
+    <pre>
+        function Person() {
+            this.name = 'CName'
+            this.age=31
+        }
+        
+        Person.prototype.name = 'pName';
+        Person.prototype.age = 23
+        Person.prototype.designation ='pDesignation'
+        
+        const person1 = new Person();
+        
+        console.log(person1.name); 
+        console.log(person1.age); 
+        console.log(person1.designation); 
+    </pre>
+    <h3>3.Add a method to calculate sum of all elements in Array in array's protype, use that method to calculate sum for multiple arrays</h3>
+    <pre>
+        arr=[1,2,3,4,5,6];
+        arr1=[7,8,5,1,2,85];
+        arr2=[84,8,9,5,7,6];
+        const arraySum ={
+            addAll:function(arr){
+                let sum=0;
+                for(let i=0;i< arr,length;i++){
+                    sum=sum+arr[i];
+                }
+                console.log(sum);
+            }
+        } 
+        
+        Array.__proto__=arraySum;
+        Array.addAll(arr);
+        Array.addAll(arr1);
+        Array.addAll(arr2);
+    </pre>
+    <h3>4. Write a JavaScript function to retrieve all the names of object's own and inherited properties.</h3>
+    <pre>
+        function allKeys(obj) {
+            if (!isObject(obj)) 
+            return [];
+            var keys = [];
+            for (var key in obj)
+             keys.push(key);
+            return keys;
+        }
+        function isObject(obj) 
+        {
+            var type = typeof obj;
+            return type === 'function' || type === 'object' && !!obj;
+          }
+        function Student(name) {
+          this.name = name;
+        }
+        Student.prototype.rollno = true;
+        console.log(allKeys(new Student("Student1")));
+    </pre>
+    <script src="script.js"></script>
+</body>
+</html>
